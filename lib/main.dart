@@ -3,6 +3,7 @@ import 'SignaturePainter.dart';
 import 'LogoApp.dart';
 import 'AsyncInFlutter.dart';
 import 'IsolateSample.dart';
+import 'CustomScrollPhysics.dart';
 
 void main() {
   runApp(new Main());
@@ -24,6 +25,7 @@ class Main extends StatelessWidget {
         '/b': (BuildContext context) => new LogoApp(),
         '/c': (BuildContext context) => new AsyncInFlutter(),
         '/d': (BuildContext context) => new IsolateSample(),
+        '/e': (BuildContext context) => new InfinityListView(),
       },
     );
   }
@@ -38,6 +40,7 @@ class ExampleList extends StatelessWidget {
         new Button("Anim - LogoApp", '/b'),
         new Button("Async In Flutter", '/c'),
         new Button("Isolate Sample", '/d'),
+        new Button("Custom ScrollPhysics", '/e'),
       ],
     );
   }
