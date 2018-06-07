@@ -7,10 +7,10 @@ import 'package:flutter_app/card_flip/card_data.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-  runApp(new Main());
+  runApp(new FlipCarousel());
 }
 
-class Main extends StatelessWidget {
+class FlipCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -194,7 +194,6 @@ class _CardFlipperState extends State<CardFlipper> with SingleTickerProviderStat
       ..setEntry(3, 3, perspective * radius + 1.0);
 
     final rotationPointMultiplier = angle > 0.0 ? angle / angle.abs() : 1.0;
-    print('Angle = $angle');
     projection *= new Matrix4.translationValues(
             horizontalTranslation + (rotationPointMultiplier * 300.0), 0.0, 0.0) *
         new Matrix4.rotationY(angle) *

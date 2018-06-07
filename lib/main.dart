@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/card_flip/FlipCarousel.dart';
 import 'SignaturePainter.dart';
 import 'LogoApp.dart';
 import 'AsyncInFlutter.dart';
@@ -26,6 +27,7 @@ class Main extends StatelessWidget {
         '/c': (BuildContext context) => new AsyncInFlutter(),
         '/d': (BuildContext context) => new IsolateSample(),
         '/e': (BuildContext context) => new InfinityListView(),
+        '/f': (BuildContext context) => new FlipCarousel(),
       },
     );
   }
@@ -41,6 +43,7 @@ class ExampleList extends StatelessWidget {
         new Button("Async In Flutter", '/c'),
         new Button("Isolate Sample", '/d'),
         new Button("Custom ScrollPhysics", '/e'),
+        new Button("Flip Carousel", '/f'),
       ],
     );
   }
