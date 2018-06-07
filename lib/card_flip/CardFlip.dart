@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -169,12 +170,38 @@ class _CardFlipperState extends State<CardFlipper> with SingleTickerProviderStat
       translation: new Offset(cardIndex - cardScrollPercent, 0.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Card(
-          model,
-          parallaxPercent,
+        child: Transform(
+          transform: _buildCardProjection(cardScrollPercent - cardIndex),
+          child: Card(
+            model,
+            parallaxPercent,
+          ),
         ),
       ),
     );
+  }
+
+  Matrix4 _buildCardProjection(double scrollPercent) {
+    final perspective = 0.002;
+    final radius = 1.0;
+    final angle = scrollPercent * pi / 8;
+    final horizontalTranslation = 0.0;
+    Matrix4 projection = new Matrix4.identity()
+      ..setEntry(0, 0, 1 / radius)
+      ..setEntry(1, 1, 1 / radius)
+      ..setEntry(3, 2, -perspective)
+      ..setEntry(2, 3, -radius)
+      ..setEntry(3, 3, perspective * radius + 1.0);
+
+    final rotationPointMultiplier = angle > 0.0 ? angle / angle.abs() : 1.0;
+    print('Angle = $angle');
+    projection *= new Matrix4.translationValues(
+            horizontalTranslation + (rotationPointMultiplier * 300.0), 0.0, 0.0) *
+        new Matrix4.rotationY(angle) *
+        new Matrix4.translationValues(0.0, 0.0, radius) *
+        new Matrix4.translationValues(-rotationPointMultiplier * 300.0, 0.0, 0.0);
+
+    return projection;
   }
 }
 
